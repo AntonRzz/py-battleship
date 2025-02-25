@@ -55,6 +55,9 @@ class Battleship:
         for ship in self.ships:
             for deck in ship.decks:
                 for i in range(deck.row - 1, deck.row + 2):
-                    for j in range(deck.column -1, deck.column + 2):
-                        if (i, j) in self.field and (i, j) != (deck.row, deck.column):
+                    for _column in range(deck.column - 1, deck.column + 2):
+                        if (
+                            (i, _column) in self.field
+                            and (i, _column) != (deck.row, deck.column)
+                        ):
                             return False
