@@ -35,7 +35,7 @@ class Ship:
 
 
 class Battleship:
-    def __init__(self, ships: List[Tuple[Tuple[int, int]]]) -> None:
+    def __init__(self, ships: List[Tuple[int, int]]) -> None:
         self.field = {}
         for ship_start, ship_end in ships:
             ship = Ship(ship_start, ship_end)
@@ -50,3 +50,11 @@ class Battleship:
                 return "Sunk!"
             return "Hit!"
         return "Miss!"
+
+    def _validate_field(self) -> bool:
+        for ship in self.ships:
+            for deck in ship.decks:
+                for i in range(deck.row - 1, deck.row + 2):
+                    for j in range(deck.column -1, deck.column + 2):
+                        if (i, j) in self.field and (i, j) != (deck.row, deck.column):
+                            return False
